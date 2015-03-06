@@ -14,11 +14,11 @@ game.PlayerEntity = me.Entity.extend({
         this.body.setVelocity(5, 20);
         //makes screen follow player
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
-        
+
         //adds animations for name, frames and speed
         this.renderable.addAnimation("idle", [78]);
         this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
-        
+        this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
         //sets current animation for game start
         this.renderable.setCurrentAnimation("idle");
     },
@@ -48,7 +48,17 @@ game.PlayerEntity = me.Entity.extend({
             }
 
         }
-        if (this.body.vel.x !== 0) {
+
+        if (me.input.isKeyPressed('attack')) {
+            if (!this.renderable.isCurrentAnimation("attack")) {
+                //sets animation to attack than to idle
+                this.renderable.setCurrentAnimation("attack", "idle");
+                //begin from first animation
+                this.renderable.setAnimationFrame();
+            }
+
+
+        } else if (this.body.vel.x !== 0) {
             if (!this.renderable.isCurrentAnimation("walk")) {
                 this.renderable.setCurrentAnimation("walk");
                 this.renderable.setAnimationFrame();
@@ -81,7 +91,7 @@ game.PlayerBaseEntity = me.Entity.extend({
         this.body.onCollision = this.onCollision.bind(this);
 
         this.type = "PlayerBaseEntity";
-        
+
         this.renderable.addAnimation("idle", [0]);
         this.renderable.addAnimation("broken", [1]);
         this.renderable.setCurrentAnimation("idle");
@@ -102,7 +112,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 });
 
 game.EnemyBaseEntity = me.Entity.extend({
-        init: function (x, y, settings) {
+    init: function (x, y, settings) {
         this._super(me.Entity, 'init', [x, y, {
                 image: "tower",
                 width: 100,
