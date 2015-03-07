@@ -12,6 +12,7 @@ game.PlayerEntity = me.Entity.extend({
             }]);
         //sets velocity
         this.body.setVelocity(5, 20);
+        this.facing = "right";
         //makes screen follow player
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
@@ -27,12 +28,14 @@ game.PlayerEntity = me.Entity.extend({
         if (me.input.isKeyPressed("right")) {
             this.flipX(true);
             this.body.vel.x += this.body.accel.x * me.timer.tick;
+            this.facing = "right";
 
         }
         //control for moving left
         else if (me.input.isKeyPressed("left")) {
             this.flipX(false);
             this.body.vel.x -= this.body.accel.x * me.timer.tick;
+            this.facing = "left";
         }
         //for when mario stands still
         else {
@@ -66,11 +69,25 @@ game.PlayerEntity = me.Entity.extend({
         } else {
             this.renderable.setCurrentAnimation("idle");
         }
-
+        // me.collision.check(this, true, this.collideHandler.bind(this));
         this.body.update(delta);
         this._super(me.Entity, "update", [delta]);
         return true;
-    }
+    },
+    // collideHandler: function (response) {
+    //    if (response.b.type==='EnemyBaseEntity') {
+    //        var ydif = this.pos.y - response.b.pos.y;
+    //        var xdif = this.pos.x - response.b.pos.x;
+
+    //        if (xdif > - 35 && this.facing === "right"){
+    //            this.body.vel.x = 0;
+    //            this.pos.x = this.pos.x - 1;
+    //        }else if(xdif<60 && this.facing === "left"){
+    //             this.body.vel.x = 0;
+    //             this.pos.x = this.pos.x + 1;
+    //        }
+    //    }
+    //  }
 });
 
 game.PlayerBaseEntity = me.Entity.extend({
@@ -82,7 +99,7 @@ game.PlayerBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function () {
-                    return(new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return(new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
             }]);
         this.broken = false;
@@ -120,7 +137,7 @@ game.EnemyBaseEntity = me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function () {
-                    return(new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return(new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
             }]);
         this.broken = false;
