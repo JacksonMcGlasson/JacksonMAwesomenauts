@@ -60,12 +60,12 @@ game.PlayerEntity = me.Entity.extend({
             }
 
 
-        } else if (this.body.vel.x !== 0) {
+        } else if (this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
             if (!this.renderable.isCurrentAnimation("walk")) {
                 this.renderable.setCurrentAnimation("walk");
                 this.renderable.setAnimationFrame();
             }
-        } else {
+        } else if(!this.renderable.isCurrentAnimation("attack")){
             this.renderable.setCurrentAnimation("idle");
         }
         me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -74,16 +74,29 @@ game.PlayerEntity = me.Entity.extend({
         return true;
     },
     collideHandler: function (response) {
+        //collisions with the enemy base
         if (response.b.type === 'EnemyBaseEntity') {
             var ydif = this.pos.y - response.b.pos.y;
             var xdif = this.pos.x - response.b.pos.x;
 
-            if (xdif > -35 && this.facing === "right" && (xdif<0)) {
+            //collision from the top
+            if (ydif < -40 && xdif > 70 && xdif < -35) {
+                this.body.falling = false;
+                this.body.vel.y = -1;
+            }
+            //collision from the left
+            else if (xdif > -35 && this.facing === "right" && (xdif < 0) && ydif > -50) {
                 this.body.vel.x = 0;
                 this.pos.x = this.pos.x - 1;
-            } else if (xdif < 70 && this.facing === "left" && (xdif>0)) {
+                //collision from the right
+            } else if (xdif < 70 && this.facing === "left" && (xdif > 0) && ydif > -50) {
                 this.body.vel.x = 0;
                 this.pos.x = this.pos.x + 1;
+            }
+            //collision from the top
+            else if (ydif < -40) {
+                this.body.falling = false;
+                this.body.vel.y = -1;
             }
         }
     }
