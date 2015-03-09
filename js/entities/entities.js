@@ -65,7 +65,7 @@ game.PlayerEntity = me.Entity.extend({
                 this.renderable.setCurrentAnimation("walk");
                 this.renderable.setAnimationFrame();
             }
-        } else if(!this.renderable.isCurrentAnimation("attack")){
+        } else if (!this.renderable.isCurrentAnimation("attack")) {
             this.renderable.setCurrentAnimation("idle");
         }
         me.collision.check(this, true, this.collideHandler.bind(this), true);
