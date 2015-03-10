@@ -12,7 +12,11 @@ game.PlayerEntity = me.Entity.extend({
             }]);
         //sets velocity
         this.body.setVelocity(5, 20);
+
         this.facing = "right";
+        this.now = new Date().getTime();
+        this.lastHit = this.now;
+        this.lastAttack = new Date().getTime();
         //makes screen follow player
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
@@ -24,6 +28,7 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable.setCurrentAnimation("idle");
     },
     update: function (delta) {
+        this.now = new Date().getTime();
         //control for moving right
         if (me.input.isKeyPressed("right")) {
             this.body.vel.x += this.body.accel.x * me.timer.tick;
@@ -97,6 +102,12 @@ game.PlayerEntity = me.Entity.extend({
             else if (ydif < -40) {
                 this.body.falling = false;
                 this.body.vel.y = -1;
+            }
+
+            if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= 1000) {
+                console.log('towerhit');
+                this.lastHit = this.now;
+                response.b.loseHealth();
             }
         }
     }
@@ -173,6 +184,9 @@ game.EnemyBaseEntity = me.Entity.extend({
     },
     onCollision: function () {
 
+    },
+    loseHealth: function () {
+        this.health--;
     }
 
 });
