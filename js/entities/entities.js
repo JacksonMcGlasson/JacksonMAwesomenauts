@@ -259,9 +259,9 @@ game.GameManager = Object.extend({
     update: function () {
         this.now = new Date().getTime();
 
-        if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
+        if (Math.round(this.now / 1400) % 10 === 0 && (this.now - this.lastCreep >= 1400)) {
             this.lastCreep = this.now;
-            var creepe = me.pool.pull("EnemyCreep", 1000, 0, {});
+            var creepe = me.pool.pull("EnemyCreep", 1400, 0, {});
             me.game.world.addChild(creepe, 5);
         }
 
