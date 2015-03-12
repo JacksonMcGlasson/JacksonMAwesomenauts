@@ -4,7 +4,19 @@ var game = {
     // an object where to store game information
     data: {
         // score
-        score: 0
+        score: 0,
+        enemyBaseHealth: 10,
+        playerBaseHealth: 10,
+        enemyCreepHealth: 5,
+        playerHealth: 10,
+        enemyCreepAttack: 1,
+        playerAttack: 1,
+        playerAttackTimer: 1000,
+        creepAttackTimer: 1000,
+        playerMoveSpeed: 5,
+        creepMoveSpeed: 5,
+        gameManager: "",
+        player: ""
     },
     // Run on page load.
     "onload": function () {
@@ -45,6 +57,6 @@ var game = {
         me.state.set(me.state.PLAY, new game.PlayScreen());
 
         // Start the game.
-        me.state.change(me.state.PLAY);
+        me.state.change(me.state.MENU);
     }
 };
