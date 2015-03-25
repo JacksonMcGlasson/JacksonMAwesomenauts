@@ -11,6 +11,7 @@ game.SpendExp = me.ScreenObject.extend({
         me.input.bindKey(me.input.KEY.F4, "F4");
         me.input.bindKey(me.input.KEY.F5, "F5");
         var exp1cost = ((game.data.exp1 + 1) * 10);
+         var exp3cost = ((game.data.exp3 + 1) * 10);
 
         me.game.world.addChild(new (me.Renderable.extend({
             init: function () {
@@ -23,30 +24,35 @@ game.SpendExp = me.ScreenObject.extend({
                 this.font.draw(renderer.getContext(), "CURRENT EXP: " + game.data.exp.toString(), this.pos.x + 100, this.pos.y + 50);
                 this.font.draw(renderer.getContext(), "F1: INCREASE GOLD PRODUCTION  CURRENT LEVEL:" + game.data.exp1.toString() + "  COST:" + exp1cost, this.pos.x, this.pos.y + 100);
                 this.font.draw(renderer.getContext(), "F2: ADD STARTING GOLD ", this.pos.x, this.pos.y + 150);
-                this.font.draw(renderer.getContext(), "F3: INCREASE DAMAGE ", this.pos.x, this.pos.y + 200);
+                this.font.draw(renderer.getContext(), "F3: INCREASE DAMAGE", this.pos.x, this.pos.y + 200);
                 this.font.draw(renderer.getContext(), "F4: INCREASE HEALTH ", this.pos.x, this.pos.y + 250);
             }
 
         })));
 
-      this.handler = me.event.subscribe(me.event.KEYDOWN, function(action, keycode, edge){
-          if(action === "F1"){
-              if(game.data.exp >= exp1cost){
-                  game.data.exp1 += 1;
-                  game.data.exp -= exp1cost;
-              }else{
-                  console.log("Not enough cash")
-              }
-          }else if(action === "F2"){
-              
-          }else if(action === "F3"){
-              
-          }else if(action === "F4"){
-              
-          }else if(action === "F5"){
-              me.state.change(me.state.PLAY);
-          }
-      });
+        this.handler = me.event.subscribe(me.event.KEYDOWN, function (action, keycode, edge) {
+            if (action === "F1") {
+                if (game.data.exp >= exp1cost) {
+                    game.data.exp1 += 1;
+                    game.data.exp -= exp1cost;
+                } else {
+                    console.log("Not enough cash")
+                }
+            } else if (action === "F2") {
+
+            } else if (action === "F3") {
+                 if (game.data.exp >= exp3cost) {
+                    game.data.exp3 += 1;
+                    game.data.exp -= exp3cost;
+                } else {
+                    console.log("Not enough cash")
+                }
+            } else if (action === "F4") {
+
+            } else if (action === "F5") {
+                me.state.change(me.state.PLAY);
+            }
+        });
 
     },
     /**	

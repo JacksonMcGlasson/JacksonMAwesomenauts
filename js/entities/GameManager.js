@@ -107,7 +107,7 @@ game.SpendGold = Object.extend({
 
     },
     setBuyText: function () {
-       me.game.world.addChild(new (me.Renderable.extend({
+        game.data.buytext = new (me.Renderable.extend({
             init: function () {
                 this._super(me.Renderable, 'init', [game.data.pausePos.x, game.data.pausePos.y, 300, 50]);
                 this.font = new me.Font("Arial", 26, "white");
@@ -115,11 +115,18 @@ game.SpendGold = Object.extend({
                 this.alwaysUpdate = true;
             },
             draw: function (renderer) {
-                this.font.draw(renderer.getContext(), "PRESS F1-F6 TO BUY, B TO SKIP ", this.pos.x, this.pos.y);
+                this.font.draw(renderer.getContext(), "PRESS F1-F6 TO BUY, B TO SKIP. CURRENT GOLD: " + game.data.gold, this.pos.x, this.pos.y);
+                this.font.draw(renderer.getContext(), "SKILL 1: INCREASE DAMAGE. CURRENT LEVEL: "+ game.data.skill1 + " COST: " +((game.data.skill1 + 1) * 10), this.pos.x, this.pos.y);
+                this.font.draw(renderer.getContext(), "SKILL 2: RUN FASTER. CURRENT LEVEL: "+ game.data.skill2 + " COST: " +((game.data.skill2 + 1) * 10), this.pos.x, this.pos.y + 40);
+                this.font.draw(renderer.getContext(), "SKILL 3: INCREASE HEALTH. CURRENT LEVEL: "+ game.data.skill3 + " COST: " +((game.data.skill3 + 1) * 10), this.pos.x, this.pos.y + 80);
+                this.font.draw(renderer.getContext(), "ABILITY Q: SPEED BURST. CURRENT LEVEL: "+ game.data.ability1 + " COST: " +((game.data.ability1 + 1) * 10), this.pos.x, this.pos.y + 120);
+                this.font.draw(renderer.getContext(), "ABILITY W: EAT CREEP FOR HEALTH. CURRENT LEVEL: "+ game.data.ability2 + " COST: " +((game.data.ability2 + 1) * 10), this.pos.x, this.pos.y + 160);
+                this.font.draw(renderer.getContext(), "ABILITY E: SPEAR THROUGH. CURRENT LEVEL: "+ game.data.ability3 + " COST: " +((game.data.ability3 + 1) * 10), this.pos.x, this.pos.y + 220);
                 ;
             }
 
-        })));
+        }));
+        me.game.world.addChild(game.data.buytext, 35);
     },
     stopBuying: function () {
         this.buying = false;
@@ -132,6 +139,7 @@ game.SpendGold = Object.extend({
         me.input.unbindKey(me.input.KEY.F4, "F4", true);
         me.input.unbindKey(me.input.KEY.F5, "F5", true);
         me.input.unbindKey(me.input.KEY.F6, "F6", true);
+        me.game.world.removeChild(game.data.buytext);
     }
 
 });
