@@ -11,7 +11,7 @@ game.SpendExp = me.ScreenObject.extend({
         me.input.bindKey(me.input.KEY.F4, "F4");
         me.input.bindKey(me.input.KEY.F5, "F5");
         var exp1cost = ((game.data.exp1 + 1) * 10);
-         var exp3cost = ((game.data.exp3 + 1) * 10);
+        var exp3cost = ((game.data.exp3 + 1) * 10);
 
         me.game.world.addChild(new (me.Renderable.extend({
             init: function () {
@@ -41,7 +41,7 @@ game.SpendExp = me.ScreenObject.extend({
             } else if (action === "F2") {
 
             } else if (action === "F3") {
-                 if (game.data.exp >= exp3cost) {
+                if (game.data.exp >= exp3cost) {
                     game.data.exp3 += 1;
                     game.data.exp -= exp3cost;
                 } else {
