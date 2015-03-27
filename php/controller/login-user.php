@@ -34,9 +34,9 @@ if ($query->num_rows == 1) {
         //sends user to index page after logging in
         header("Location:" . $path . "index.php");
     } else {
-        echo "<p>Invalid Username and Password!</p>";
+        echo "Invalid Username and Password!";
     }
 } else {
-    echo "<p>Invalid Username and Password!</p>";
+    echo "Invalid Username and Password!";
 }
     
