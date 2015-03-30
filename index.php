@@ -96,7 +96,7 @@ require_once (__DIR__ . "/php/controller/create-db.php");
                             $("#register").bind("click", function () {
                                   $.ajax({
                                       type: "POST",
-                                       url: "/../php/controller/create-user.php",
+                                       url: "php/controller/create-user.php",
                                        data: {
                                           username: $('#username').val(),
                                           password: $('#password').val()
@@ -112,13 +112,13 @@ require_once (__DIR__ . "/php/controller/create-db.php");
                                       }
                                   })
                                   .fail(function(response){
-                                      alert("Fail");
+                                      alert(response);
                                   });
                            });
                             $("#load").bind("click", function () {
                                $.ajax({
                                   type: "POST",
-                                  url: "/../php/controller/load-user.php",
+                                  url: "php/controller/login-user.php",
                                   data: {
                                     username: $('#username').val(),
                                     password: $('#password').val()
@@ -140,7 +140,7 @@ require_once (__DIR__ . "/php/controller/create-db.php");
                                     }
                                   })
                                   .fail(function(response){
-                                      alert("Fail");
+                                      alert(response);
                                   });
                             });
         </script>

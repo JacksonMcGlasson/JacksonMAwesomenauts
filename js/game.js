@@ -17,6 +17,7 @@ var game = {
         creepMoveSpeed: 3,
         gameTimerManager: "",
         heroDeathManager: "",
+        spearTimer: 15,
         player: "",
         exp: 0,
         gold: 0,
@@ -49,7 +50,7 @@ var game = {
                 me.plugin.register.defer(this, debugPanel, "debug");
             });
         }
-        
+
 
         me.state.SPENDEXP = 112;
         me.state.LOAD = 113;
@@ -79,6 +80,7 @@ var game = {
         me.pool.register("SpendGold", game.SpendGold);
         me.pool.register("NewProfile", game.NewProfile);
         me.pool.register("LoadProfile", game.LoadProfile);
+        me.pool.register("spear", game.SpearThrow);
 
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
