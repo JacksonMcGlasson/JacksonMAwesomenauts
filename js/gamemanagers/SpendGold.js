@@ -98,7 +98,9 @@ game.SpendGold = Object.extend({
                 this.makePurchase(5);
             }
         } else if (me.input.isKeyPressed("F6")) {
-
+            if (this.checkCost(6)) {
+                this.makePurchase(6);
+            }
         }
     },
     checkCost: function (skill) {

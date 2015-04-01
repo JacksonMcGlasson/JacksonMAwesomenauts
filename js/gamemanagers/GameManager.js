@@ -1,6 +1,4 @@
 
-
-
 game.ExperienceManager = Object.extend({
     init: function (x, y, settings) {
         this.alwaysUpdate = true;
@@ -29,7 +27,7 @@ game.ExperienceManager = Object.extend({
 
         $.ajax({
             type: "POST",
-            url: "/../php/controller/save-user.php",
+            url: "/JacksonMAwesomenauts/php/controller/save-user.php",
             data: {
                 exp: game.data.exp,
                 exp1: game.data.exp1,
