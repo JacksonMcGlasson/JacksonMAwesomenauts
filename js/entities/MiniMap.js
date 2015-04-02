@@ -1,0 +1,3 @@
+game.MiniMap = Object.extend({
+    
+});
