@@ -84,7 +84,7 @@ var game = {
         me.pool.register("NewProfile", game.NewProfile);
         me.pool.register("LoadProfile", game.LoadProfile);
         me.pool.register("spear", game.SpearThrow, true);
-        me.pool.register("minimap", game.MiniMap, true);
+        me.pool.register("MiniMap", game.MiniMap, true);
 
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());

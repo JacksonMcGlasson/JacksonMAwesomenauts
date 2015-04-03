@@ -1,4 +1,4 @@
-game.MiniMap = Entity.extend({
+game.MiniMap = me.Entity.extend({
     init: function (x, y, settings, facing) {
         this._super(me.Entity, 'init', [x, y, {
                 image: "minimap",

@@ -12,7 +12,7 @@ game.SpearThrow = me.Entity.extend({
             }]);
         this.alwaysUpdate = true;
         this.body.setVelocity(12, 0);
-        this, attack = game.data.ability3 * 3;
+        this.attack = game.data.ability3 * 3;
         this.type = "spear";
         this.facing = facing;
     },

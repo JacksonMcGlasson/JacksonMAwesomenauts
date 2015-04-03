@@ -32,7 +32,7 @@ if ($query->num_rows == 1) {
         $_SESSION["name"] = $username;
         echo json_encode($array);
         //sends user to index page after logging in
-        header("Location:" . $path . "index.php");
+        //header("Location:" . $path . "index.php");
     } else {
         echo "Invalid Username and Password!";
     }
