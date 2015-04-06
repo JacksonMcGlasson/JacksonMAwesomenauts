@@ -18,7 +18,9 @@ game.GameTimerManager = Object.extend({
         }
     },
     creepTimerCheck: function () {
+        //has it been 10 sec since last creep spawn
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
+            //makes only one a second
             this.lastCreep = this.now;
             var creepe = me.pool.pull("EnemyCreep", 2500, 0, {});
             me.game.world.addChild(creepe, 5);

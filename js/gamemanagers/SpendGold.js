@@ -11,8 +11,10 @@ game.SpendGold = Object.extend({
         this.now = new Date().getTime();
         // console.log(this.now - this.lastBuy);
         if (me.input.isKeyPressed("buy") && ((this.now - this.lastBuy) >= 1000)) {
+            console.log("buy screen")
             this.lastBuy = this.now;
             if (!this.buying) {
+                 console.log("time to buy")
                 this.startBuying();
             } else {
                 this.stopBuying();
@@ -24,7 +26,7 @@ game.SpendGold = Object.extend({
     },
     startBuying: function () {
         this.buying = true;
-        //me.state.pause(me.state.PLAY);
+        me.state.pause(me.state.PLAY);
         game.data.pausePos = me.game.viewport.localToWorld(0, 0);
         game.data.buyscreen = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage("gold-screen"));
         game.data.buyscreen.updateWhenPaused = true;
