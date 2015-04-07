@@ -27,6 +27,8 @@ game.PlayScreen = me.ScreenObject.extend({
 
         var miniMap = me.pool.pull("MiniMap", 10, 10, {});
         me.game.world.addChild(game.data.minimap, 0);
+        
+        
 
         me.input.bindKey(me.input.KEY.B, "buy");
         me.input.bindKey(me.input.KEY.Q, "skill1");
@@ -51,5 +53,8 @@ game.PlayScreen = me.ScreenObject.extend({
     resetPlayer: function (x, y) {
         game.data.player = me.pool.pull("player", x, y, {});
         me.game.world.addChild(game.data.player, 5);
+        
+         var miniPlayer = me.pool.pull("miniplayer", 10, 10, {});
+        me.game.world.addChild(game.data.minimap, 31);
     }
 });

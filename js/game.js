@@ -10,8 +10,10 @@ var game = {
         enemyBaseHealth: 10,
         playerBaseHealth: 10,
         enemyCreepHealth: 5,
+        playerCreepHealth: 5,
         playerHealth: 10,
         enemyCreepAttack: 1,
+        playerCreepAttack: 1,
         playerAttack: 2,
         playerAttackTimer: 1000,
         creepAttackTimer: 1000,
@@ -37,7 +39,8 @@ var game = {
         pausePos: "",
         buyscreen: "",
         buytext: "",
-        minimap: ""
+        minimap: "",
+        miniPlayer: ""
     },
     // Run on page load.
     "onload": function () {
@@ -77,6 +80,7 @@ var game = {
         me.pool.register("PlayerBase", game.PlayerBaseEntity);
         me.pool.register("EnemyBase", game.EnemyBaseEntity);
         me.pool.register("EnemyCreep", game.EnemyCreep, true);
+        me.pool.register("PlayerCreep", game.PlayerCreep, true);
         me.pool.register("GameTimerManager", game.GameTimerManager);
         me.pool.register("HeroDeathManager", game.HeroDeathManager);
         me.pool.register("ExperienceManager", game.ExperienceManager);
@@ -85,6 +89,7 @@ var game = {
         me.pool.register("LoadProfile", game.LoadProfile);
         me.pool.register("spear", game.SpearThrow, true);
         me.pool.register("MiniMap", game.MiniMap, true);
+        me.pool.register("MiniPlayerLocation", game.MiniPlayerLocation, true);
 
         me.state.set(me.state.MENU, new game.TitleScreen());
         me.state.set(me.state.PLAY, new game.PlayScreen());
